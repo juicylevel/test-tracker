@@ -17,10 +17,10 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Collectors;
 
 /**
  *
@@ -53,7 +53,7 @@ public class AppJFrame extends javax.swing.JFrame {
     }
     
     private void onOpenClientCard(ActionEvent e) {
-        ClientCardDialog dialog = new ClientCardDialog(this);
+        ClientCardDialog dialog = new ClientCardDialog(this, (String) this.jClientComboBox.getSelectedItem());
         dialog.setVisible(true);
     }
     
@@ -100,7 +100,7 @@ public class AppJFrame extends javax.swing.JFrame {
         jShowClientCardButton.setToolTipText("");
 
 //        clientOptionsListModel.addListDataListener();
-        jClientOptionList.setModel(getClientOptionsListModel(clientService.clientOptionList(getCurrentClient())));
+        jClientOptionList.setModel(getClientOptionsListModel(clientOptionList));
 
         jClientPanel.setViewportView(jClientOptionList);
 
@@ -251,7 +251,7 @@ public class AppJFrame extends javax.swing.JFrame {
         };
     }
 
-    private void optionValueChanged(Object selectedItem) {
+    private void optionValueChanged_2(Object selectedItem) {
         logger.info("Reset model with item {} for current client", selectedItem);
         DefaultListModel<String> model = (DefaultListModel<String>) jClientOptionList.getModel();
         model.clear();
@@ -260,6 +260,14 @@ public class AppJFrame extends javax.swing.JFrame {
         model.setSize(clientOptionList.size());
         AtomicInteger ai = new AtomicInteger(0);
         clientOptionList.forEach(c -> model.setElementAt(c, ai.getAndIncrement()));
+    }
+
+    private void optionValueChanged(Object selectedItem) {
+        logger.info("Reset model with item {} for current client", selectedItem);
+        List<String> newClientOptionList = clientService.clientOptionList((String) selectedItem);
+        logger.info("update with client options {}", String.join(",", newClientOptionList));
+        clientOptionList.clear();
+        clientOptionList.addAll(newClientOptionList);
     }
 
     @Nullable
@@ -283,6 +291,7 @@ public class AppJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JList<String> jClientOptionList;
+    private final List<String> clientOptionList = new ArrayList<>();
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jClientPanel;
     // End of variables declaration//GEN-END:variables

@@ -21,6 +21,7 @@ import java.util.function.Function;
 public class ClientService implements Autowire.Bean {
   private static final Logger logger = LoggerFactory.getLogger(ClientService.class);
   public static final String[] EMPTY_STRINGS = new String[] {};
+  private static final ClientFormValues EMPTY_CLIENT = new ClientFormValues("", "", "", List.of(), "");
 
   private final CsvDatabaseReader csvDatabaseReader;
 
@@ -62,6 +63,17 @@ public class ClientService implements Autowire.Bean {
         logger.error("Can't save data", e);
       }
     }
+  }
+
+  public ClientFormValues getClient(String clientName) {
+    if (clientName == null) { return EMPTY_CLIENT; }
+    Client client = clientConcurrentHashMap.get(clientName);
+    return Optional.ofNullable(client).map(this::toClient).orElse(EMPTY_CLIENT);
+  }
+
+  private ClientFormValues toClient(Client client) {
+    return new ClientFormValues(client.getName(), client.getTripTitle(), client.getNotes(),
+        Optional.ofNullable(client.getWishes()).map(wishes -> List.of(wishes.split(","))).orElse(List.of()), client.getPriceRange());
   }
 
   public List<String> clientOptionList(String currentClient) {

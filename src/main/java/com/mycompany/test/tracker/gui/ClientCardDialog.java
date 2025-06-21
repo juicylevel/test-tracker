@@ -4,6 +4,9 @@
  */
 package com.mycompany.test.tracker.gui;
 
+import com.mycompany.test.tracker.service.Autowire;
+import com.mycompany.test.tracker.service.ClientService;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
@@ -13,22 +16,16 @@ import java.util.ArrayList;
  *
  * @author yurirykov
  */
-public class ClientCardDialog extends JDialog {    
-    public ClientCardDialog (JFrame owner) {
+public class ClientCardDialog extends JDialog {
+    private final ClientService clientService;
+    public ClientCardDialog (JFrame owner, String clientName) {
         super(owner, "Client card", true);
-        
+        clientService = Autowire.autowire(ClientService.class);
+
         ClientCard clientCard = new ClientCard();
         // TODO: set client data
-        List<String> options = new ArrayList<>();
-        options.add("Night club");
-        options.add("etc");
-        ClientFormValues client = new ClientFormValues(
-            "Иванов Иван Иванович",
-            "Тур де франс",
-            "Много велосипедов",
-            options,
-            "15000"
-        );
+
+        ClientFormValues client = clientService.getClient(clientName);
         clientCard.setClient(client);
         //
         
