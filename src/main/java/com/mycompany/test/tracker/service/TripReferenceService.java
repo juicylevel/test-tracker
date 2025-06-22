@@ -6,8 +6,6 @@ import com.opencsv.exceptions.CsvException;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
@@ -24,14 +22,17 @@ public class TripReferenceService implements Autowire.Bean {
   public TripReferenceService() {
     csvDatabaseReader = Autowire.autowire(CsvDatabaseReader.class);
     tripConcurrentHashMap = new ConcurrentHashMap<>();
-    state = new AtomicReference<>(DbState.NEW);
+    state = new AtomicReference<>(DbState.INIT);
   }
 
   public List<String> tripList(Function<Trip, String> extractor) {
-    if (state.get() == DbState.NEW) {
+    if (state.get() == DbState.INIT) {
       try {
-        Path clientPath = retrieveTripPath();
-        csvDatabaseReader.mapAllLines(clientPath, Trip.class)
+        Configuration.CvsDatabasePath tripPath = retrieveTripPath();
+        if (tripPath.state() == DbState.NEW) {
+          csvDatabaseReader.saveAll(tripPath.path(), Trip.class, Configuration.retrieveDefaultTripConfiguration());
+        }
+        csvDatabaseReader.mapAllLines(tripPath.path(), Trip.class)
             .forEach(trip -> tripConcurrentHashMap.put(extractor.apply(trip), trip));
         state.set(DbState.ACTUAL);
       } catch (IOException | CsvException e) {
@@ -42,15 +43,7 @@ public class TripReferenceService implements Autowire.Bean {
   }
 
   @NotNull
-  private static Path retrieveTripPath() throws IOException {
-    Path tripPath = Configuration.getTripsPath();
-    if (Files.isRegularFile(tripPath)) {
-      return tripPath;
-    } else if (Files.isDirectory(tripPath)) {
-      throw new IllegalArgumentException("trip.csv should be a file in a user directory %s, but this is directory".formatted(System.getProperty("user.home")));
-    } else {
-      Files.createFile(tripPath);
-    }
-    return tripPath;
+  private static Configuration.CvsDatabasePath retrieveTripPath() throws IOException {
+    return Configuration.getOrInitDefaultPath(Configuration.getTripsPath());
   }
 }

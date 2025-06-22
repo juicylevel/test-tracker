@@ -9,8 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -30,17 +28,17 @@ public class ClientService implements Autowire.Bean {
 
   public ClientService() {
     csvDatabaseReader = Autowire.autowire(CsvDatabaseReader.class);
-    state = new AtomicReference<>(DbState.NEW);
+    state = new AtomicReference<>(DbState.INIT);
     clientConcurrentHashMap = new ConcurrentHashMap<>();
   }
 
   public List<String> clientList(Function<Client, String> extractor) {
-    if (state.get() == DbState.NEW) {
+    if (state.get() == DbState.INIT) {
       try {
-        Path clientPath = retrieveClientPath();
-        csvDatabaseReader.mapAllLines(clientPath, Client.class)
+        Configuration.CvsDatabasePath clientPath = retrieveClientPath();
+        csvDatabaseReader.mapAllLines(clientPath.path(), Client.class)
             .forEach(client -> clientConcurrentHashMap.put(extractor.apply(client), client));
-        state.set(DbState.ACTUAL);
+        state.set(clientPath.state());
       } catch (IOException | CsvException e) {
         throw new IllegalStateException("Can't read the client database file", e);
       }
@@ -57,7 +55,7 @@ public class ClientService implements Autowire.Bean {
   public void persist() {
     if (state.get() == DbState.UPDATED) {
       try {
-        csvDatabaseReader.saveAll(retrieveClientPath(), Client.class, clientConcurrentHashMap.values().stream());
+        csvDatabaseReader.saveAll(retrieveClientPath().path(), Client.class, clientConcurrentHashMap.values().stream());
         state.set(DbState.ACTUAL);
       } catch (IOException e) {
         logger.error("Can't save data", e);
@@ -89,15 +87,7 @@ public class ClientService implements Autowire.Bean {
   }
 
   @NotNull
-  private static Path retrieveClientPath() throws IOException {
-    Path clientPath = Configuration.getClientPath();
-    if (Files.isRegularFile(clientPath)) {
-      return clientPath;
-    } else if (Files.isDirectory(clientPath)) {
-      throw new IllegalArgumentException("client.csv should be a file in a user directory %s, but this is directory".formatted(System.getProperty("user.home")));
-    } else {
-      Files.createFile(clientPath);
-    }
-    return clientPath;
+  private static Configuration.CvsDatabasePath retrieveClientPath() throws IOException {
+    return Configuration.getOrInitDefaultPath(Configuration.getClientPath());
   }
 }
