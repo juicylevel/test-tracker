@@ -1,36 +1,65 @@
 package com.mycompany.test.tracker.gui;
 
 import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.plot.PiePlot;
+import org.jfree.chart.title.LegendTitle;
+import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
+import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.data.general.DefaultPieDataset;
 
-import javax.swing.*;
-import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.util.List;
+import java.text.DecimalFormat;
 
-public class PieChart extends JPanel {
+import com.mycompany.test.tracker.model.RangeValue;
 
-    public PieChart() {
-        this.setPreferredSize(new java.awt.Dimension(300, 300));
-        
+public class PricesRangeChart {
+    private final ChartPanel chartPanel;
+
+    public PricesRangeChart(List<RangeValue> data) {
         DefaultPieDataset dataset = new DefaultPieDataset();
-        dataset.setValue("Категория A", 45);
-        dataset.setValue("Категория B", 30);
-        dataset.setValue("Категория C", 25);
+
+        for (RangeValue item : data) {
+            dataset.setValue(item.getRange(), item.getValue());
+        }
 
         JFreeChart chart = ChartFactory.createPieChart(
-                "Пример круговой диаграммы",
+                null, // title
                 dataset,
-                true,
+                true, // include legend
                 true,
                 false
         );
+        
+        LegendTitle legend = chart.getLegend();
+        legend.setPosition(RectangleEdge.BOTTOM);
 
-        ChartPanel chartPanel = new ChartPanel(chart);
-        setLayout(new BorderLayout());
-        add(chartPanel, BorderLayout.CENTER);
+        // Настройка отображения процентов внутри секторов
+        PiePlot plot = (PiePlot) chart.getPlot();
 
-        setBorder(new LineBorder(Color.GRAY, 2)); 
+        // Отображать только проценты (без названия и значения)
+        plot.setLabelGenerator(new StandardPieSectionLabelGenerator(
+                "{2}",                      // формат: только процент
+                new DecimalFormat("0"),     // число (не используется)
+                new DecimalFormat("0.0%")   // процент с 1 знаком после запятой
+        ));
+
+        // Настройка стиля меток внутри секторов
+        plot.setSimpleLabels(true);
+        plot.setLabelBackgroundPaint(null);
+        plot.setLabelShadowPaint(null);
+        plot.setLabelOutlinePaint(null);
+        plot.setLabelFont(plot.getLabelFont().deriveFont(14f));
+        plot.setLabelPaint(Color.black); // цвет шрифта — белый для контраста
+
+        // Создаем панель для диаграммы и добавляем в окно
+        chartPanel = new ChartPanel(chart);
+        chartPanel.setPreferredSize(new Dimension(270, 280));
+    }
+
+    public ChartPanel getChartPanel() {
+        return chartPanel;
     }
 }
