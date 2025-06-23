@@ -43,20 +43,14 @@ public class AppJFrame extends javax.swing.JFrame {
         tripReferenceService = Autowire.autowire(TripReferenceService.class);
         initComponents();
         
-        // jAddNewClientButton
-        jButton1.addActionListener(this::onOpenForm);
-        // jShowClientCardButton
-        jButton2.addActionListener(this::onOpenClientCard);
-        jButton3.addActionListener(this::onOpenSearchTrip);
-        
-        // jClientOptionList
-        jList1.setModel(getClientOptionsListModel(clientOptionList));
-        
-        // jClientComboBox
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(clientService.clientList(Client::getName).toArray(String[]::new)));
-        jComboBox1.addActionListener(actionEvent -> {
-            if (actionEvent.getSource() == jComboBox1) {
-                optionValueChanged(jComboBox1.getSelectedItem());
+        jAddNewClientButton.addActionListener(this::onOpenForm);
+        jShowClientCardButton.addActionListener(this::onOpenClientCard);
+        generateButton.addActionListener(this::onOpenSearchTrip);
+        requirementsList.setModel(getClientOptionsListModel(clientOptionList));
+        clientCombobox.setModel(new javax.swing.DefaultComboBoxModel<>(clientService.clientList(Client::getName).toArray(String[]::new)));
+        clientCombobox.addActionListener(actionEvent -> {
+            if (actionEvent.getSource() == clientCombobox) {
+                optionValueChanged(clientCombobox.getSelectedItem());
             } else {
                 logger.info("We have another event with {}", actionEvent.getSource());
             }
@@ -78,8 +72,7 @@ public class AppJFrame extends javax.swing.JFrame {
     }
     
     private void onOpenClientCard(ActionEvent e) {
-        // jClientComboBox
-        ClientCardDialog dialog = new ClientCardDialog(this, (String) this.jComboBox1.getSelectedItem());
+        ClientCardDialog dialog = new ClientCardDialog(this, (String) this.clientCombobox.getSelectedItem());
         dialog.setVisible(true);
     }
     
@@ -99,20 +92,20 @@ public class AppJFrame extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jAddNewClientButton = new javax.swing.JButton();
+        jShowClientCardButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
-        jButton3 = new javax.swing.JButton();
+        requirementsList = new javax.swing.JList<>();
+        generateButton = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        clientCombobox = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        priceRangeComboBox = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        tripsComboBox = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -121,46 +114,46 @@ public class AppJFrame extends javax.swing.JFrame {
 
         jLabel4.setText("List customers requirements");
 
-        jButton1.setText("Add new client");
+        jAddNewClientButton.setText("Add new client");
 
-        jButton2.setText("Show client card");
-        jButton2.setToolTipText("");
+        jShowClientCardButton.setText("Show client card");
+        jShowClientCardButton.setToolTipText("");
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+        requirementsList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(requirementsList);
 
-        jButton3.setText("Generate");
+        generateButton.setText("Generate");
 
         jLabel5.setText("Got to see each client page");
 
         jLabel6.setText("Number of clients for each trip");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.setSelectedIndex(-1);
-        jComboBox1.setName("client"); // NOI18N
+        clientCombobox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        clientCombobox.setSelectedIndex(-1);
+        clientCombobox.setName("client"); // NOI18N
 
         jLabel7.setText("Prices range");
 
-        jLabel1.setLabelFor(jComboBox1);
+        jLabel1.setLabelFor(clientCombobox);
         jLabel1.setText("Clients names");
 
-        jLabel2.setLabelFor(jComboBox2);
+        jLabel2.setLabelFor(priceRangeComboBox);
         jLabel2.setText("Range of prices");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0-10000", "10000-15000", "15000-20000", "20000-25000" }));
-        jComboBox2.setSelectedIndex(-1);
-        jComboBox2.setName("priceRange"); // NOI18N
+        priceRangeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0-10000", "10000-15000", "15000-20000", "20000-25000" }));
+        priceRangeComboBox.setSelectedIndex(-1);
+        priceRangeComboBox.setName("priceRange"); // NOI18N
 
-        jLabel3.setLabelFor(jComboBox3);
+        jLabel3.setLabelFor(tripsComboBox);
         jLabel3.setText("List of trips");
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox3.setSelectedIndex(-1);
-        jComboBox3.setName("trip"); // NOI18N
+        tripsComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        tripsComboBox.setSelectedIndex(-1);
+        tripsComboBox.setName("trip"); // NOI18N
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel2.setName("pieChartPanel"); // NOI18N
@@ -169,11 +162,11 @@ public class AppJFrame extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 311, Short.MAX_VALUE)
+            .addGap(0, 325, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 263, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -191,24 +184,24 @@ public class AppJFrame extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1)
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(clientCombobox, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(24, 24, 24)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel5)
-                                    .addComponent(jButton2)
-                                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jShowClientCardButton)
+                                    .addComponent(generateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jAddNewClientButton, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(91, 91, 91)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel7)
                                     .addComponent(jLabel6)
-                                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addContainerGap(20, Short.MAX_VALUE))
+                                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(priceRangeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tripsComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -221,33 +214,32 @@ public class AppJFrame extends javax.swing.JFrame {
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
+                    .addComponent(clientCombobox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jShowClientCardButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(priceRangeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tripsComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton3)
+                            .addComponent(generateButton)
                             .addComponent(jLabel7))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton1))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jAddNewClientButton)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -284,8 +276,7 @@ public class AppJFrame extends javax.swing.JFrame {
 
     private void optionValueChanged_2(Object selectedItem) {
         logger.info("Reset model with item {} for current client", selectedItem);
-        // jClientOptionList
-        DefaultListModel<String> model = (DefaultListModel<String>) jList1.getModel();
+        DefaultListModel<String> model = (DefaultListModel<String>) requirementsList.getModel();
         model.clear();
         List<String> clientOptionList = clientService.clientOptionList((String) selectedItem);
         logger.info("update with client options {}", String.join(",", clientOptionList));
@@ -305,17 +296,13 @@ public class AppJFrame extends javax.swing.JFrame {
     @Nullable
     private String getCurrentSelectedClient() {
         logger.info("retrieve client selection");
-        // jClientComboBox
-        return (String) jComboBox1.getSelectedItem();
+        return (String) clientCombobox.getSelectedItem();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
+    private javax.swing.JComboBox<String> clientCombobox;
+    private javax.swing.JButton generateButton;
+    private javax.swing.JButton jAddNewClientButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -323,10 +310,13 @@ public class AppJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton jShowClientCardButton;
+    private javax.swing.JComboBox<String> priceRangeComboBox;
+    private javax.swing.JList<String> requirementsList;
+    private javax.swing.JComboBox<String> tripsComboBox;
     // End of variables declaration//GEN-END:variables
 
     public String getCurrentClient() {

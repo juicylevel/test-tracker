@@ -20,22 +20,22 @@ public class ClientForm extends javax.swing.JPanel {
     }
     
     public ClientFormValues getFormValues() {
-        String name = jTextField1.getText().trim();
-        String tripTitle = jTextField2.getText().trim();
-        String requirements = jTextArea1.getText().trim();
+        String name = clientNameTextField.getText().trim();
+        String tripTitle = tripNameTextField.getText().trim();
+        String requirements = requirementsTextArea.getText().trim();
 
         List<String> options = new ArrayList<>();
-        if (jCheckBox1.isSelected()) {
-            options.add(jCheckBox1.getText());
+        if (librariesCheckBox.isSelected()) {
+            options.add(librariesCheckBox.getText());
         }
-        if (jCheckBox2.isSelected()) {
-            options.add(jCheckBox2.getText());
+        if (nightClubsCheckBox.isSelected()) {
+            options.add(nightClubsCheckBox.getText());
         }
-        if (jCheckBox3.isSelected()) {
-            options.add(jCheckBox3.getText());
+        if (etcCheckBox.isSelected()) {
+            options.add(etcCheckBox.getText());
         }
 
-        Object selectedPrice = jComboBox1.getSelectedItem();
+        Object selectedPrice = priceComboBox.getSelectedItem();
         String price = getComboboxValue(selectedPrice);
 
         return new ClientFormValues(name, tripTitle, requirements, options, price);
@@ -54,63 +54,63 @@ public class ClientForm extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTextField1 = new javax.swing.JTextField();
+        clientNameTextField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        tripNameTextField = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        requirementsTextArea = new javax.swing.JTextArea();
         jLabel4 = new javax.swing.JLabel();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
-        jCheckBox3 = new javax.swing.JCheckBox();
+        librariesCheckBox = new javax.swing.JCheckBox();
+        nightClubsCheckBox = new javax.swing.JCheckBox();
+        etcCheckBox = new javax.swing.JCheckBox();
         jLabel5 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        priceComboBox = new javax.swing.JComboBox<>();
 
-        jTextField1.setToolTipText("Enter client name");
-        jTextField1.setActionCommand("<Not Set>");
-        jTextField1.setName("name"); // NOI18N
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        clientNameTextField.setToolTipText("Enter client name");
+        clientNameTextField.setActionCommand("<Not Set>");
+        clientNameTextField.setName("name"); // NOI18N
+        clientNameTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                clientNameTextFieldActionPerformed(evt);
             }
         });
 
-        jLabel1.setLabelFor(jTextField1);
+        jLabel1.setLabelFor(clientNameTextField);
         jLabel1.setText("Enter client name");
 
-        jLabel2.setLabelFor(jTextField2);
+        jLabel2.setLabelFor(tripNameTextField);
         jLabel2.setText("Enter name of the trip");
 
-        jTextField2.setName("tripTitle"); // NOI18N
+        tripNameTextField.setName("tripTitle"); // NOI18N
 
-        jLabel3.setLabelFor(jTextArea1);
+        jLabel3.setLabelFor(requirementsTextArea);
         jLabel3.setText("Personal requirements");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jTextArea1.setName("requirements"); // NOI18N
-        jScrollPane1.setViewportView(jTextArea1);
+        requirementsTextArea.setColumns(20);
+        requirementsTextArea.setRows(5);
+        requirementsTextArea.setName("requirements"); // NOI18N
+        jScrollPane1.setViewportView(requirementsTextArea);
 
-        jLabel4.setLabelFor(jCheckBox1);
+        jLabel4.setLabelFor(librariesCheckBox);
         jLabel4.setText("Click on options clinet is interesed in");
 
-        jCheckBox1.setText("Libraries");
-        jCheckBox1.setName("options"); // NOI18N
+        librariesCheckBox.setText("Libraries");
+        librariesCheckBox.setName("options"); // NOI18N
 
-        jCheckBox2.setText("Night clubs");
-        jCheckBox2.setName("options"); // NOI18N
+        nightClubsCheckBox.setText("Night clubs");
+        nightClubsCheckBox.setName("options"); // NOI18N
 
-        jCheckBox3.setText("etc");
-        jCheckBox3.setName("options"); // NOI18N
+        etcCheckBox.setText("etc");
+        etcCheckBox.setName("options"); // NOI18N
 
-        jLabel5.setLabelFor(jComboBox1);
+        jLabel5.setLabelFor(priceComboBox);
         jLabel5.setText("Choose price from a list");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1000", "5000", "10000", "15000", "20000", "25000" }));
-        jComboBox1.setSelectedIndex(-1);
-        jComboBox1.setName("price"); // NOI18N
+        priceComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1000", "5000", "10000", "15000", "20000", "25000" }));
+        priceComboBox.setSelectedIndex(-1);
+        priceComboBox.setName("price"); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -122,20 +122,20 @@ public class ClientForm extends javax.swing.JPanel {
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                    .addComponent(tripNameTextField)
+                    .addComponent(clientNameTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
                     .addComponent(jScrollPane1))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jCheckBox1)
+                        .addComponent(librariesCheckBox)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jCheckBox2)
+                        .addComponent(nightClubsCheckBox)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jCheckBox3))
+                        .addComponent(etcCheckBox))
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel5)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(priceComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -147,18 +147,18 @@ public class ClientForm extends javax.swing.JPanel {
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCheckBox1)
-                    .addComponent(jCheckBox2)
-                    .addComponent(jCheckBox3))
+                    .addComponent(clientNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(librariesCheckBox)
+                    .addComponent(nightClubsCheckBox)
+                    .addComponent(etcCheckBox))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tripNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(priceComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -167,23 +167,23 @@ public class ClientForm extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void clientNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientNameTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_clientNameTextFieldActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JCheckBox jCheckBox3;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JTextField clientNameTextField;
+    private javax.swing.JCheckBox etcCheckBox;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JCheckBox librariesCheckBox;
+    private javax.swing.JCheckBox nightClubsCheckBox;
+    private javax.swing.JComboBox<String> priceComboBox;
+    private javax.swing.JTextArea requirementsTextArea;
+    private javax.swing.JTextField tripNameTextField;
     // End of variables declaration//GEN-END:variables
 }

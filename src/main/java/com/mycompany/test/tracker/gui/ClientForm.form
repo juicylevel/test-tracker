@@ -22,22 +22,22 @@
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTextField2" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jTextField1" alignment="0" pref="250" max="32767" attributes="0"/>
+                  <Component id="tripNameTextField" alignment="0" max="32767" attributes="0"/>
+                  <Component id="clientNameTextField" alignment="0" pref="250" max="32767" attributes="0"/>
                   <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jCheckBox1" min="-2" max="-2" attributes="0"/>
+                      <Component id="librariesCheckBox" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jCheckBox2" min="-2" max="-2" attributes="0"/>
+                      <Component id="nightClubsCheckBox" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jCheckBox3" min="-2" max="-2" attributes="0"/>
+                      <Component id="etcCheckBox" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jLabel4" max="32767" attributes="0"/>
                   <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                  <Component id="jComboBox1" alignment="0" min="-2" pref="250" max="-2" attributes="0"/>
+                  <Component id="priceComboBox" alignment="0" min="-2" pref="250" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -53,10 +53,10 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jCheckBox1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jCheckBox2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jCheckBox3" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="clientNameTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="librariesCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="nightClubsCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="etcCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -65,8 +65,8 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jTextField2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="tripNameTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="priceComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
@@ -78,20 +78,20 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JTextField" name="jTextField1">
+    <Component class="javax.swing.JTextField" name="clientNameTextField">
       <Properties>
         <Property name="toolTipText" type="java.lang.String" value="Enter client name"/>
         <Property name="actionCommand" type="java.lang.String" value="&lt;Not Set&gt;"/>
         <Property name="name" type="java.lang.String" value="name" noResource="true"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="clientNameTextFieldActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
         <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-          <ComponentRef name="jTextField1"/>
+          <ComponentRef name="clientNameTextField"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Enter client name"/>
       </Properties>
@@ -99,12 +99,12 @@
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
         <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-          <ComponentRef name="jTextField2"/>
+          <ComponentRef name="tripNameTextField"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Enter name of the trip"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField2">
+    <Component class="javax.swing.JTextField" name="tripNameTextField">
       <Properties>
         <Property name="name" type="java.lang.String" value="tripTitle" noResource="true"/>
       </Properties>
@@ -112,7 +112,7 @@
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
         <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-          <ComponentRef name="jTextArea1"/>
+          <ComponentRef name="requirementsTextArea"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Personal requirements"/>
       </Properties>
@@ -124,7 +124,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTextArea" name="jTextArea1">
+        <Component class="javax.swing.JTextArea" name="requirementsTextArea">
           <Properties>
             <Property name="columns" type="int" value="20"/>
             <Property name="rows" type="int" value="5"/>
@@ -136,24 +136,24 @@
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
         <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-          <ComponentRef name="jCheckBox1"/>
+          <ComponentRef name="librariesCheckBox"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Click on options clinet is interesed in"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="jCheckBox1">
+    <Component class="javax.swing.JCheckBox" name="librariesCheckBox">
       <Properties>
         <Property name="text" type="java.lang.String" value="Libraries"/>
         <Property name="name" type="java.lang.String" value="options" noResource="true"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="jCheckBox2">
+    <Component class="javax.swing.JCheckBox" name="nightClubsCheckBox">
       <Properties>
         <Property name="text" type="java.lang.String" value="Night clubs"/>
         <Property name="name" type="java.lang.String" value="options" noResource="true"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="jCheckBox3">
+    <Component class="javax.swing.JCheckBox" name="etcCheckBox">
       <Properties>
         <Property name="text" type="java.lang.String" value="etc"/>
         <Property name="name" type="java.lang.String" value="options" noResource="true"/>
@@ -162,12 +162,12 @@
     <Component class="javax.swing.JLabel" name="jLabel5">
       <Properties>
         <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-          <ComponentRef name="jComboBox1"/>
+          <ComponentRef name="priceComboBox"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Choose price from a list"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="jComboBox1">
+    <Component class="javax.swing.JComboBox" name="priceComboBox">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="6">

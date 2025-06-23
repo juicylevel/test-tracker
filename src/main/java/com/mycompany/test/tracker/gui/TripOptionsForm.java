@@ -20,15 +20,15 @@ public class TripOptionsForm extends javax.swing.JPanel {
     public TripOptionsForm() {
         initComponents();
         
-        jComboBox1.addActionListener(e -> {
+        priceRangeComboBox.addActionListener(e -> {
             handleChangeOptions();
         });
         
-        jComboBox2.addActionListener(e -> {
+        continentComboBox.addActionListener(e -> {
             handleChangeOptions();
         });
         
-        jComboBox3.addActionListener(e -> {
+        temperatureComboBox.addActionListener(e -> {
             handleChangeOptions();
         });
     }
@@ -42,9 +42,9 @@ public class TripOptionsForm extends javax.swing.JPanel {
     }
     
     public TripOptions getFormValues() {
-        Object selectedPriceRange = jComboBox1.getSelectedItem();
-        Object selectedContinent = jComboBox2.getSelectedItem();
-        Object selectedTemperature = jComboBox3.getSelectedItem();
+        Object selectedPriceRange = priceRangeComboBox.getSelectedItem();
+        Object selectedContinent = continentComboBox.getSelectedItem();
+        Object selectedTemperature = temperatureComboBox.getSelectedItem();
         
         String priceRange = getComboboxValue(selectedPriceRange);
         String continent = getComboboxValue(selectedContinent);
@@ -78,36 +78,36 @@ public class TripOptionsForm extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        priceRangeComboBox = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        continentComboBox = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        temperatureComboBox = new javax.swing.JComboBox<>();
 
-        jLabel1.setLabelFor(jComboBox1);
+        jLabel1.setLabelFor(priceRangeComboBox);
         jLabel1.setText("Enter optimal price range");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0-10000", "10000-15000", "15000-20000", "20000-25000" }));
-        jComboBox1.setSelectedIndex(-1);
-        jComboBox1.setName("priceRange"); // NOI18N
+        priceRangeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0-10000", "10000-15000", "15000-20000", "20000-25000" }));
+        priceRangeComboBox.setSelectedIndex(-1);
+        priceRangeComboBox.setName("priceRange"); // NOI18N
 
         jLabel2.setText("Enter continent in wich client is interesed in");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "America", "Europe", "Asia" }));
-        jComboBox2.setSelectedIndex(-1);
-        jComboBox2.setToolTipText("");
-        jComboBox2.setName("continent"); // NOI18N
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+        continentComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "America", "Europe", "Asia" }));
+        continentComboBox.setSelectedIndex(-1);
+        continentComboBox.setToolTipText("");
+        continentComboBox.setName("continent"); // NOI18N
+        continentComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
+                continentComboBoxActionPerformed(evt);
             }
         });
 
-        jLabel3.setText("Choose wether country should be ");
+        jLabel3.setText("Choose weather country should be ");
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "warm", "cold", "average" }));
-        jComboBox3.setSelectedIndex(-1);
-        jComboBox3.setName("temperature"); // NOI18N
+        temperatureComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "warm", "cold", "average" }));
+        temperatureComboBox.setSelectedIndex(-1);
+        temperatureComboBox.setName("temperature"); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -118,11 +118,10 @@ public class TripOptionsForm extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel1)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(temperatureComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(continentComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(priceRangeComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -131,31 +130,31 @@ public class TripOptionsForm extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(priceRangeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(continentComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(temperatureComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+    private void continentComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_continentComboBoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox2ActionPerformed
+    }//GEN-LAST:event_continentComboBoxActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
+    private javax.swing.JComboBox<String> continentComboBox;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JComboBox<String> priceRangeComboBox;
+    private javax.swing.JComboBox<String> temperatureComboBox;
     // End of variables declaration//GEN-END:variables
 
 }
