@@ -7,10 +7,6 @@ package com.mycompany.test.tracker.gui;
 
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author
- */
 public class TripSearchResult extends javax.swing.JPanel {
     
     String[] columnNames = {"Continent", "Weather", "Price"};

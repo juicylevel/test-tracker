@@ -10,10 +10,6 @@ import org.apache.commons.collections4.CollectionUtils;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- *
- * @author 
- */
 public class ClientFormValues {
     private final String name;
     private final String tripTitle;

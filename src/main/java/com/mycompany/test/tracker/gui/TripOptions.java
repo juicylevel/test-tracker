@@ -4,10 +4,6 @@
  */
 package com.mycompany.test.tracker.gui;
 
-/**
- *
- * @author
- */
 public class TripOptions {
     private final String priceRange;
     private final String continent;

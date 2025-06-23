@@ -6,10 +6,6 @@ package com.mycompany.test.tracker.gui;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author
- */
 public class ClientForm extends javax.swing.JPanel {
 
     /**

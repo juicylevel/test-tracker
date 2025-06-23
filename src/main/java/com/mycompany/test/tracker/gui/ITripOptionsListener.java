@@ -4,10 +4,6 @@
  */
 package com.mycompany.test.tracker.gui;
 
-/**
- *
- * @author
- */
 public interface ITripOptionsListener {
     void onTripOptionsSubmitted(TripOptions values);
 }

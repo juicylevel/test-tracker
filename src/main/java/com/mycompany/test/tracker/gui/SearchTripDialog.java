@@ -7,10 +7,6 @@ package com.mycompany.test.tracker.gui;
 import java.awt.*;
 import javax.swing.*;
 
-/**
- *
- * @author yurirykov
- */
 public class SearchTripDialog extends JDialog {
     public SearchTripDialog (JFrame owner) {
         super(owner, "Generate", true);

@@ -4,10 +4,6 @@
  */
 package com.mycompany.test.tracker.model;
 
-/**
- *
- * @author
- */
 public class RangeValue {
     private String range;
     private int value;

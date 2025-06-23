@@ -8,9 +8,7 @@ import com.mycompany.test.tracker.gui.AppJFrame;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * @author zera
- */
+
 public class TestTrackerStarter {
   private static final Logger logger = LoggerFactory.getLogger(TestTrackerStarter.class);
 

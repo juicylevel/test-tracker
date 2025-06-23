@@ -36,23 +36,20 @@ public class PricesRangeChart {
         LegendTitle legend = chart.getLegend();
         legend.setPosition(RectangleEdge.BOTTOM);
 
-        // Настройка отображения процентов внутри секторов
         PiePlot plot = (PiePlot) chart.getPlot();
 
-        // Отображать только проценты (без названия и значения)
         plot.setLabelGenerator(new StandardPieSectionLabelGenerator(
-                "{2}",                      // формат: только процент
-                new DecimalFormat("0"),     // число (не используется)
-                new DecimalFormat("0.0%")   // процент с 1 знаком после запятой
+                "{2}",                      
+                new DecimalFormat("0"),     
+                new DecimalFormat("0.0%") 
         ));
 
-        // Настройка стиля меток внутри секторов
         plot.setSimpleLabels(true);
         plot.setLabelBackgroundPaint(null);
         plot.setLabelShadowPaint(null);
         plot.setLabelOutlinePaint(null);
         plot.setLabelFont(plot.getLabelFont().deriveFont(14f));
-        plot.setLabelPaint(Color.black); // цвет шрифта — белый для контраста
+        plot.setLabelPaint(Color.black); 
 
         // Создаем панель для диаграммы и добавляем в окно
         chartPanel = new ChartPanel(chart);

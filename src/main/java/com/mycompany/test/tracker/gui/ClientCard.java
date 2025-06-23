@@ -5,10 +5,6 @@
 
 package com.mycompany.test.tracker.gui;
 
-/**
- *
- * @author yurirykov
- */
 public class ClientCard extends javax.swing.JPanel {
 
     /** Creates new form ClientCard */

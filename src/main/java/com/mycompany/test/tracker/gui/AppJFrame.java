@@ -29,10 +29,6 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.data.general.DefaultPieDataset;
 import java.awt.*;
 
-/**
- *
- * @author 
- */
 public class AppJFrame extends javax.swing.JFrame {
     private static final Logger logger = LoggerFactory.getLogger(AppJFrame.class);
 

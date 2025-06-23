@@ -12,10 +12,6 @@ import java.awt.*;
 import java.util.List;
 import java.util.ArrayList;
 
-/**
- *
- * @author yurirykov
- */
 public class ClientCardDialog extends JDialog {
     private final ClientService clientService;
     public ClientCardDialog (JFrame owner, String clientName) {

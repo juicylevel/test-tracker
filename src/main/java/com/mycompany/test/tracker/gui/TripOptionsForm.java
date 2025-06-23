@@ -8,10 +8,6 @@ package com.mycompany.test.tracker.gui;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author yurirykov
- */
 public class TripOptionsForm extends javax.swing.JPanel {
     
     private final List<ITripOptionsListener> listeners = new ArrayList<>();

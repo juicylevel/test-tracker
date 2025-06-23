@@ -10,9 +10,6 @@ import com.mycompany.test.tracker.service.ClientService;
 import javax.swing.*;
 import java.awt.*;
 
-/**
- * @author
- */
 public class CreateClientDialog extends JDialog {
   private final ClientForm clientForm = new ClientForm();
   private final ClientService clientService;
