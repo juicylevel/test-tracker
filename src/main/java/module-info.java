@@ -8,6 +8,7 @@ module com.mycompany.test.tracker {
     requires java.desktop;
     requires java.sql;
     requires org.jfree.jfreechart;
+    requires com.github.lgooddatepicker;
     requires org.jetbrains.annotations;
     requires org.slf4j;
     requires com.opencsv;
