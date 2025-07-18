@@ -41,7 +41,7 @@ public class CreateClientDialog extends JDialog {
     submit.addActionListener(ev -> {
       ClientFormValues formValues = clientForm.getFormValues();
       clientService.saveClient(formValues);
-      JOptionPane.showMessageDialog(this, "Введено: " + formValues.toString());
+      JOptionPane.showMessageDialog(this, "Клиент успешно сохранен");
       dispose();
     });
 
