@@ -89,7 +89,7 @@ public class AppJFrame extends javax.swing.JFrame {
     }
     
     private void onOpenForm(ActionEvent e) {
-        CreateClientDialog dialog = new CreateClientDialog(this);
+        CreateClientDialog dialog = new CreateClientDialog(this, clientCombobox::addItem);
         dialog.setVisible(true);
     }
     

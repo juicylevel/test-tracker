@@ -15,6 +15,10 @@ public class CreateClientDialog extends JDialog {
   private final ClientService clientService;
 
   public CreateClientDialog(JFrame owner) {
+    this(owner, null);
+  }
+
+  public CreateClientDialog(JFrame owner, OnClientCreated onClientCreated) {
     super(owner, "Create new client", true);
     clientService = Autowire.autowire(ClientService.class);
 
@@ -34,14 +38,15 @@ public class CreateClientDialog extends JDialog {
     buttonPanel.add(cancel);
     buttonPanel.add(submit);
 
-    cancel.addActionListener(ev -> {
-      dispose();
-    });
+    cancel.addActionListener(ev -> dispose());
 
     submit.addActionListener(ev -> {
       ClientFormValues formValues = clientForm.getFormValues();
       clientService.saveClient(formValues);
-      JOptionPane.showMessageDialog(this, "Введено: " + formValues.toString());
+      JOptionPane.showMessageDialog(this, "Клиент успешно сохранен");
+      if (onClientCreated != null) {
+        onClientCreated.accept(formValues.getName());
+      }
       dispose();
     });
 
@@ -52,5 +57,10 @@ public class CreateClientDialog extends JDialog {
 
     pack();
     setLocationRelativeTo(owner);
+  }
+
+  @FunctionalInterface
+  public interface OnClientCreated {
+    void accept(String clientName);
   }
 }
