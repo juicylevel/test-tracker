@@ -4,20 +4,24 @@
  */
 package com.mycompany.test.tracker.gui;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class ClientForm extends javax.swing.JPanel {
 
+    private final List<String> tripNames;
+
     /**
      * Creates new form ClientForm
      */
-    public ClientForm() {
+    public ClientForm(Collection<String> tripNames) {
+        this.tripNames = List.copyOf(tripNames);
         initComponents();
     }
     
     public ClientFormValues getFormValues() {
         String name = clientNameTextField.getText().trim();
-        String tripTitle = tripNameTextField.getText().trim();
+        String tripTitle = getComboboxValue(tripNameCombobox.getSelectedItem());
         String requirements = requirementsTextArea.getText().trim();
 
         List<String> options = new ArrayList<>();
@@ -53,7 +57,7 @@ public class ClientForm extends javax.swing.JPanel {
         clientNameTextField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        tripNameTextField = new javax.swing.JTextField();
+        tripNameCombobox = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         requirementsTextArea = new javax.swing.JTextArea();
@@ -76,10 +80,14 @@ public class ClientForm extends javax.swing.JPanel {
         jLabel1.setLabelFor(clientNameTextField);
         jLabel1.setText("Enter client name");
 
-        jLabel2.setLabelFor(tripNameTextField);
+        jLabel2.setLabelFor(tripNameCombobox);
         jLabel2.setText("Enter name of the trip");
 
-        tripNameTextField.setName("tripTitle"); // NOI18N
+        tripNameCombobox.setName("tripTitle"); // NOI18N
+        tripNameCombobox.setModel(new javax.swing.DefaultComboBoxModel<>(
+            tripNames.toArray(String[]::new)
+        ));
+        tripNameCombobox.setSelectedIndex(-1);
 
         jLabel3.setLabelFor(requirementsTextArea);
         jLabel3.setText("Personal requirements");
@@ -118,7 +126,7 @@ public class ClientForm extends javax.swing.JPanel {
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3)
-                    .addComponent(tripNameTextField)
+                    .addComponent(tripNameCombobox)
                     .addComponent(clientNameTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
                     .addComponent(jScrollPane1))
                 .addGap(18, 18, 18)
@@ -153,7 +161,7 @@ public class ClientForm extends javax.swing.JPanel {
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tripNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tripNameCombobox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(priceComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
@@ -180,6 +188,6 @@ public class ClientForm extends javax.swing.JPanel {
     private javax.swing.JCheckBox nightClubsCheckBox;
     private javax.swing.JComboBox<String> priceComboBox;
     private javax.swing.JTextArea requirementsTextArea;
-    private javax.swing.JTextField tripNameTextField;
+    private javax.swing.JComboBox<String> tripNameCombobox;
     // End of variables declaration//GEN-END:variables
 }

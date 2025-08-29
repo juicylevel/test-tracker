@@ -1,19 +1,18 @@
 package com.mycompany.test.tracker.gui;
 
+import com.mycompany.test.tracker.model.RangeValue;
 import org.jfree.chart.ChartFactory;
-import org.jfree.chart.JFreeChart;
 import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
 import org.jfree.chart.plot.PiePlot;
 import org.jfree.chart.title.LegendTitle;
-import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.data.general.DefaultPieDataset;
 
 import java.awt.*;
-import java.util.List;
 import java.text.DecimalFormat;
-
-import com.mycompany.test.tracker.model.RangeValue;
+import java.util.List;
 
 public class PricesRangeChart {
     private final ChartPanel chartPanel;

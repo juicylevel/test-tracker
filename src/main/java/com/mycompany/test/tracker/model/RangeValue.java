@@ -6,9 +6,9 @@ package com.mycompany.test.tracker.model;
 
 public class RangeValue {
     private String range;
-    private int value;
+    private double value;
 
-    public RangeValue(String range, int value) {
+    public RangeValue(String range, double value) {
         this.range = range;
         this.value = value;
     }
@@ -17,7 +17,7 @@ public class RangeValue {
         return range;
     }
 
-    public int getValue() {
+    public double getValue() {
         return value;
     }
 

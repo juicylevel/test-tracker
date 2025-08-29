@@ -4,15 +4,18 @@
  */
 package com.mycompany.test.tracker.gui;
 
+import com.mycompany.test.tracker.model.Trip;
 import com.mycompany.test.tracker.service.Autowire;
 import com.mycompany.test.tracker.service.ClientService;
+import com.mycompany.test.tracker.service.TripReferenceService;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class CreateClientDialog extends JDialog {
-  private final ClientForm clientForm = new ClientForm();
+  private final ClientForm clientForm;
   private final ClientService clientService;
+  private final TripReferenceService tripReferenceService;
 
   public CreateClientDialog(JFrame owner) {
     this(owner, null);
@@ -21,6 +24,9 @@ public class CreateClientDialog extends JDialog {
   public CreateClientDialog(JFrame owner, OnClientCreated onClientCreated) {
     super(owner, "Create new client", true);
     clientService = Autowire.autowire(ClientService.class);
+    tripReferenceService = Autowire.autowire(TripReferenceService.class);
+
+    clientForm = new ClientForm(tripReferenceService.tripList(Trip::getName));
 
     setLayout(new GridBagLayout());
     GridBagConstraints gbc = new GridBagConstraints();

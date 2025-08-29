@@ -5,8 +5,9 @@
 package com.mycompany.test.tracker.gui;
 
 import com.mycompany.test.tracker.model.Client;
-import com.mycompany.test.tracker.model.RangeValue;
 import com.mycompany.test.tracker.model.ClientTrip;
+import com.mycompany.test.tracker.model.RangeValue;
+import com.mycompany.test.tracker.model.Trip;
 import com.mycompany.test.tracker.service.Autowire;
 import com.mycompany.test.tracker.service.ClientService;
 import com.mycompany.test.tracker.service.TripReferenceService;
@@ -15,14 +16,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.awt.*;
+import java.util.stream.Collectors;
 
 public class AppJFrame extends javax.swing.JFrame {
     private static final Logger logger = LoggerFactory.getLogger(AppJFrame.class);
@@ -63,29 +66,45 @@ public class AppJFrame extends javax.swing.JFrame {
             }
         });
         
-        // TODO: get data from db
-        List<ClientTrip> list = new ArrayList<>();
-        list.add(new ClientTrip("Europe", 120));
-        list.add(new ClientTrip("Asia", 95));
-        list.add(new ClientTrip("America", 75));
-        list.add(new ClientTrip("Africa", 40));
-        
-        ClientTripsChart tripsChart = new ClientTripsChart(list);
+        ClientTripsChart tripsChart = new ClientTripsChart(buildClientTripGraphData());
         histogramPanel.setLayout(new BorderLayout());
         histogramPanel.add(tripsChart.getChartPanel(), BorderLayout.NORTH);
         //
         
-        // TODO: get data from db
-        List<RangeValue> dataList = new ArrayList<>();
-        dataList.add(new RangeValue("0-10000", 3));
-        dataList.add(new RangeValue("10000-15000", 10));
-        dataList.add(new RangeValue("15000-20000", 27));
-        dataList.add(new RangeValue("20000-25000", 60));
-        
-        PricesRangeChart rangeChart = new PricesRangeChart(dataList);
+        PricesRangeChart rangeChart = new PricesRangeChart(buildPricesRangeChartData());
         pieChartPanel.setLayout(new BorderLayout());
         pieChartPanel.add(rangeChart.getChartPanel(), BorderLayout.NORTH);
         //
+    }
+
+    private List<ClientTrip> buildClientTripGraphData() {
+        return clientService.getAllClients()
+            .stream()
+            .collect(
+                Collectors.groupingBy(
+                    Client::getTripTitle,
+                    Collectors.counting()
+                )
+            )
+            .entrySet()
+            .stream()
+            .map(it -> new ClientTrip(it.getKey(), it.getValue().intValue()))
+            .toList();
+    }
+
+    private List<RangeValue> buildPricesRangeChartData() {
+        var allClients = clientService.getAllClients();
+
+        return allClients.stream()
+            .collect(Collectors.groupingBy(
+                Client::getPriceRange,
+                LinkedHashMap::new,
+                Collectors.counting()
+            ))
+            .entrySet()
+            .stream()
+            .map(entry -> new RangeValue(entry.getKey(), entry.getValue().doubleValue() / allClients.size() * 100))
+            .toList();
     }
     
     private void onOpenForm(ActionEvent e) {

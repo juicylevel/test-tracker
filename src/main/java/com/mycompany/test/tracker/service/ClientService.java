@@ -46,6 +46,13 @@ public class ClientService implements Autowire.Bean {
     return new ArrayList<>(clientConcurrentHashMap.keySet());
   }
 
+  public List<Client> getAllClients() {
+    if (state.get() == DbState.INIT) {
+      clientList(Client::getName);
+    }
+    return new ArrayList<>(clientConcurrentHashMap.values());
+  }
+
   public void saveClient(ClientFormValues clientFormValues) {
     // what if we have this client already?
     clientConcurrentHashMap.put(clientFormValues.getName(), clientFormValues.toClient());
