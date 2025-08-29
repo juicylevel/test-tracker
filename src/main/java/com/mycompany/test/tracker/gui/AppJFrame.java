@@ -34,6 +34,9 @@ public class AppJFrame extends javax.swing.JFrame {
     private final TripReferenceService tripReferenceService;
     private final List<String> clientOptionList = new ArrayList<>();
 
+    private ClientTripsChart clientTripsChart;
+    private PricesRangeChart pricesRangeChart;
+
     private String currentClient;
 
     /**
@@ -66,14 +69,14 @@ public class AppJFrame extends javax.swing.JFrame {
             }
         });
         
-        ClientTripsChart tripsChart = new ClientTripsChart(buildClientTripGraphData());
+        clientTripsChart = new ClientTripsChart(buildClientTripGraphData());
         histogramPanel.setLayout(new BorderLayout());
-        histogramPanel.add(tripsChart.getChartPanel(), BorderLayout.NORTH);
+        histogramPanel.add(clientTripsChart.getChartPanel(), BorderLayout.NORTH);
         //
-        
-        PricesRangeChart rangeChart = new PricesRangeChart(buildPricesRangeChartData());
+
+        pricesRangeChart = new PricesRangeChart(buildPricesRangeChartData());
         pieChartPanel.setLayout(new BorderLayout());
-        pieChartPanel.add(rangeChart.getChartPanel(), BorderLayout.NORTH);
+        pieChartPanel.add(pricesRangeChart.getChartPanel(), BorderLayout.NORTH);
         //
     }
 
@@ -108,7 +111,11 @@ public class AppJFrame extends javax.swing.JFrame {
     }
     
     private void onOpenForm(ActionEvent e) {
-        CreateClientDialog dialog = new CreateClientDialog(this, clientCombobox::addItem);
+        CreateClientDialog dialog = new CreateClientDialog(this, clientName -> {
+            clientCombobox.addItem(clientName);
+            clientTripsChart.updateData(buildClientTripGraphData());
+            pricesRangeChart.updateData(buildPricesRangeChartData());
+        });
         dialog.setVisible(true);
     }
     

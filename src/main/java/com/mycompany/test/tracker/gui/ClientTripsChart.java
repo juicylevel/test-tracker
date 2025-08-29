@@ -4,31 +4,27 @@
  */
 package com.mycompany.test.tracker.gui;
 
+import com.mycompany.test.tracker.model.ClientTrip;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.CategoryAxis;
+import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.chart.renderer.category.StandardBarPainter;
-import org.jfree.chart.axis.CategoryAxis;
-import org.jfree.chart.axis.NumberAxis;
 import org.jfree.data.category.DefaultCategoryDataset;
-import org.jfree.chart.ui.RectangleEdge;
 
 import java.awt.*;
 import java.util.List;
 
-import com.mycompany.test.tracker.model.ClientTrip;
-
 public class ClientTripsChart {
     private final ChartPanel chartPanel;
 
-    public ClientTripsChart(List<ClientTrip> data) {
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+    private final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
-        for (ClientTrip trip : data) {
-            dataset.addValue(trip.getCount(), "", trip.getContinent());
-        }
+    public ClientTripsChart(List<ClientTrip> data) {
+        updateData(data);
 
         JFreeChart chart = ChartFactory.createBarChart(
                 null,               
@@ -70,6 +66,14 @@ public class ClientTripsChart {
 
         chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new Dimension(400, 300));
+    }
+
+    public void updateData(List<ClientTrip> data) {
+        dataset.clear();
+
+        for (ClientTrip trip : data) {
+            dataset.addValue(trip.getCount(), "", trip.getContinent());
+        }
     }
 
     public ChartPanel getChartPanel() {

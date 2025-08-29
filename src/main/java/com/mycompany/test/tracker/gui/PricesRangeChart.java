@@ -17,12 +17,10 @@ import java.util.List;
 public class PricesRangeChart {
     private final ChartPanel chartPanel;
 
-    public PricesRangeChart(List<RangeValue> data) {
-        DefaultPieDataset dataset = new DefaultPieDataset();
+    private final DefaultPieDataset<String> dataset = new DefaultPieDataset<>();
 
-        for (RangeValue item : data) {
-            dataset.setValue(item.getRange(), item.getValue());
-        }
+    public PricesRangeChart(List<RangeValue> data) {
+        updateData(data);
 
         JFreeChart chart = ChartFactory.createPieChart(
                 null, // title
@@ -53,6 +51,14 @@ public class PricesRangeChart {
         // Создаем панель для диаграммы и добавляем в окно
         chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new Dimension(270, 280));
+    }
+
+    public void updateData(List<RangeValue> data) {
+        dataset.clear();
+
+        for (RangeValue item : data) {
+            dataset.setValue(item.getRange(), item.getValue());
+        }
     }
 
     public ChartPanel getChartPanel() {
