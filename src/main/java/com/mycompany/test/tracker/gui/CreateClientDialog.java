@@ -26,7 +26,7 @@ public class CreateClientDialog extends JDialog {
     clientService = Autowire.autowire(ClientService.class);
     tripReferenceService = Autowire.autowire(TripReferenceService.class);
 
-    clientForm = new ClientForm(tripReferenceService.tripList(Trip::getName));
+    clientForm = new ClientForm(tripReferenceService.loadAllUniqueTripNames());
 
     setLayout(new GridBagLayout());
     GridBagConstraints gbc = new GridBagConstraints();

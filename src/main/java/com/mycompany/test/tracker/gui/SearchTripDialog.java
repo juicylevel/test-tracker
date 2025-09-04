@@ -4,22 +4,34 @@
  */
 package com.mycompany.test.tracker.gui;
 
-import java.awt.*;
+import com.mycompany.test.tracker.service.Autowire;
+import com.mycompany.test.tracker.service.TripReferenceService;
+
 import javax.swing.*;
+import java.awt.*;
+import java.util.LinkedHashSet;
 
 public class SearchTripDialog extends JDialog {
-    public SearchTripDialog (JFrame owner) {
+    private final TripReferenceService tripReferenceService;
+
+    public SearchTripDialog(JFrame owner) {
         super(owner, "Generate", true);
-        
-        TripOptionsForm tripOptionsForm = new TripOptionsForm();
+
+        tripReferenceService = Autowire.autowire(TripReferenceService.class);
+
+        var allTrips = tripReferenceService.loadAllTrips();
+
+        TripOptionsForm tripOptionsForm = new TripOptionsForm(buildFormComboboxValues());
         TripSearchResult tripSearchResult = new TripSearchResult();
 
+        // TODO: search trips by options
+        //
         tripOptionsForm.addTripOptionsListener(options -> {
-            // TODO: search trips by options
-            tripSearchResult.setOptions(options);
-            //
+            var searchResults = tripReferenceService.searchByFilter(options);
+
+            tripSearchResult.setOptions(searchResults, options);
         });
-        
+
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
@@ -59,5 +71,19 @@ public class SearchTripDialog extends JDialog {
 
         pack();
         setLocationRelativeTo(owner);
+    }
+
+    private TripOptionsForm.FormComboboxValues buildFormComboboxValues() {
+        var countries = new LinkedHashSet<String>();
+        var priceRanges = new LinkedHashSet<String>();
+        var weather = new LinkedHashSet<String>();
+
+        tripReferenceService.loadAllTrips().forEach(tripReference -> {
+            countries.add(tripReference.getName());
+            priceRanges.add(tripReference.getPricerange());
+            weather.add(tripReference.getWeather());
+        });
+
+        return new TripOptionsForm.FormComboboxValues(countries, weather, priceRanges);
     }
 }

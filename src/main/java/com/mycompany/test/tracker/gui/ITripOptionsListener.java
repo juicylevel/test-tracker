@@ -4,6 +4,8 @@
  */
 package com.mycompany.test.tracker.gui;
 
+import com.mycompany.test.tracker.model.TripOptions;
+
 public interface ITripOptionsListener {
     void onTripOptionsSubmitted(TripOptions values);
 }
